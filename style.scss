@@ -1,0 +1,262 @@
+
+$breakpoints : (
+  desktop:1280px,
+  tablet :1000px,
+  mobile : 480px,
+  tiny   : 380px,
+);
+
+@mixin query($display){
+  @each $key, $value in $breakpoints {
+    //  defining max-width
+    @if ($display == $key) {
+      @media (max-width: $value){ @content; }
+    }
+  }
+}
+
+
+
+/*---------- resets ----------*/
+* {
+  box-sizing: border-box;
+  margin-block: 0;
+  margin-block: 0;
+  margin-inline: 0;
+  margin: 0;
+  padding-block: 0;
+  padding-inline-start: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  scroll-behavior: smooth;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+  transition: 200ms;
+}
+ul {
+  list-style-type: none;
+}
+button {
+  border: 0;
+  cursor: pointer;
+  transition: 200ms;
+}
+img {
+  border: 0;
+}
+
+
+// * { border:1px solid rgba(230, 90, 240, 0.5);}
+
+/*---------- globals ----------*/
+:root {
+  --background : #C8C8C8;
+  --primary    : #6C63FF;
+  --secondary  : #4D4C59;
+  --text       : #9C9AB6;
+  --white      : #ffffff;
+}
+
+body {
+  align-items: center;
+  background-color: var(--background);
+  color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+h1 {
+  color: var(--primary);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 10.5% ;
+  line-height: 5.4rem;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: clamp(1.2rem, 5vw, 1.4rem);
+  line-height: 2.1rem;
+}
+
+a {
+  color: var(--primary);
+  font-weight: 400;
+  text-decoration: none;
+  transition: 200ms;
+}
+a:hover {
+  color: var(--title);
+}
+a strong {
+  font-weight: 600;
+}
+
+button {
+  background-color: var(--primary);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: Poppins;
+  font-size: 1.8rem;
+  letter-spacing: 1.5%;
+  margin-bottom: 1.4rem;
+  max-height: 5.1rem;
+  padding: 1.2rem 3.4rem;
+  text-transform: uppercase;
+  transition: 200ms;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: var(--secondary);
+  }
+}
+
+
+
+/*---------- decorative images --------------------------------------------------*/
+button {
+  z-index: 2;
+}
+#top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+#bottom {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+
+
+
+/*---------- main --------------------------------------------------*/
+main {
+  align-items: center;
+  background-color: var(--white);
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+  margin: 0 auto;
+  min-width: 32rem;
+  padding-bottom: clamp(10rem, 5vw, 6rem);
+  padding-left: clamp(3rem, 5vw, 6rem);
+  padding-right: clamp(3rem, 5vw, 6rem);
+  padding-top: clamp(10rem, 5vw, 6rem);
+  width: 100%;
+
+  /*---------------------------*/
+      @include query(tablet) {
+        & {
+          flex-direction: column;
+        }
+      }
+
+  section {
+    width: 50%;
+  }
+  aside {
+    text-align: right;
+    width: 50%;
+    /*---------------------------*/
+        @include query(tablet) {
+          & {
+            order: -1;
+            text-align: center;
+            width: 100%;
+          }
+        }
+
+    img {
+      max-height: 43.5rem;
+      max-width: 61rem;
+      width: 100%;
+      /*---------------------------*/
+          @include query(tablet) {
+            & {
+              width: 60%;
+            }
+          }
+          @include query(mobile) {
+            & {
+              width: 90%;
+            }
+          }
+          @include query(tiny) {
+            & {
+              width: 100%;
+            }
+          }
+    }
+  }
+
+  #launch {
+    display: flex;
+    flex-direction: column;
+    height: 43.5rem;
+    justify-content: space-between;
+    text-align: center;
+    /*---------------------------*/
+        @include query(tablet) {
+          & {
+            width: 100%;
+          }
+        }
+
+    button {
+      width: 18rem;
+      align-self:center;
+    }
+
+    #timer {
+      align-items: center;
+      color: var(--secondary);
+      display: flex;
+      font-size: clamp(3.2rem, 5vw, 7.2rem);
+      font-weight: 400;
+      justify-content: space-evenly;
+      line-height: clamp(7.0rem, 5vw, 10.8rem);
+      margin-top: -4rem;
+      /*---------------------------*/
+          @include query(tablet) {
+            & {
+              margin-top: 0rem;
+            }
+          }
+
+      span[id] {
+        text-align: center;
+        width: 12rem;
+      }
+    }
+
+    .light {
+      align-items: center;
+      color: var(--background);
+      display: flex;
+      font-style: normal;
+      font-weight: 300;
+      justify-content: space-around;
+      text-transform: capitalize;
+      width: 100%;
+
+      span {
+        display: inline-block;
+        text-align: center;
+        width: 12rem;
+      }
+    }
+  }
+}
